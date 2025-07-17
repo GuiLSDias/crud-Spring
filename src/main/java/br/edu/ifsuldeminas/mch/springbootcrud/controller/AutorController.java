@@ -50,7 +50,7 @@ public class AutorController {
             model.addAttribute("autor", autor.get());
             return "autores/formAutor";
         }
-        return "redirect:/autores/listar"; // Redireciona se o autor não for encontrado
+        return "redirect:/autores/listar";
     }
 
     @GetMapping("/excluir/{id}")

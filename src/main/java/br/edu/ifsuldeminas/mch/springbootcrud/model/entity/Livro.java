@@ -22,7 +22,7 @@ public class Livro {
 
     @NotBlank(message = "O ISBN é obrigatório")
     @Size(min = 10, max = 17, message = "O ISBN deve ter entre {min} e {max} caracteres")
-    @Column(nullable = false, unique = true, length = 17) // Considerando ISBN-10 ou ISBN-13
+    @Column(nullable = false, unique = true, length = 17)
     private String isbn;
 
     @NotNull(message = "O ano de publicação é obrigatório")

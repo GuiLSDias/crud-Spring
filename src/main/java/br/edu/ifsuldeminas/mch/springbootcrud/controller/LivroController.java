@@ -24,7 +24,7 @@ public class LivroController {
     private LivroRepository livroRepository;
 
     @Autowired
-    private AutorRepository autorRepository; // Para popular o dropdown de autores
+    private AutorRepository autorRepository;
 
     @GetMapping("/listar")
     public String listarLivros(Model model) {
@@ -35,14 +35,14 @@ public class LivroController {
     @GetMapping("/novo")
     public String novoLivro(Model model) {
         model.addAttribute("livro", new Livro());
-        model.addAttribute("autores", autorRepository.findAll()); // Popula a lista de autores
+        model.addAttribute("autores", autorRepository.findAll());
         return "livros/formLivro";
     }
 
     @PostMapping("/salvar")
     public String salvarLivro(@Valid Livro livro, BindingResult result, Model model) {
         if (result.hasErrors()) {
-            model.addAttribute("autores", autorRepository.findAll()); // Recarrega autores em caso de erro
+            model.addAttribute("autores", autorRepository.findAll());
             return "livros/formLivro";
         }
         livroRepository.save(livro);
@@ -54,7 +54,7 @@ public class LivroController {
         Optional<Livro> livro = livroRepository.findById(id);
         if (livro.isPresent()) {
             model.addAttribute("livro", livro.get());
-            model.addAttribute("autores", autorRepository.findAll()); // Popula a lista de autores
+            model.addAttribute("autores", autorRepository.findAll());
             return "livros/formLivro";
         }
         return "redirect:/livros/listar";

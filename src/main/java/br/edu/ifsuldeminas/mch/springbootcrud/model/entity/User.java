@@ -49,7 +49,7 @@ public class User {
 	public User() {
 
 		this.name = "";
-		this.gender = Gender.F; // Valor padrão
+		this.gender = Gender.F;
 		this.email = "";
 		this.address = new Address();
 	}
@@ -96,7 +96,6 @@ public class User {
 		this.address = address;
 	}
 
-	// Você pode adicionar um getter/setter para 'log' se precisar manipulá-lo no controller/service
 	public String getLog() {
 		return log;
 	}
@@ -110,17 +109,16 @@ public class User {
 		M('M'),
 		F('F');
 
-		private final Character genderChar; // Renomeado para evitar conflito com getGender() do User
+		private final Character genderChar;
 
 		private Gender(Character genderChar) {
 			this.genderChar = genderChar;
 		}
 
-		public Character getGenderChar() { // Getter para o caractere
+		public Character getGenderChar() {
 			return genderChar;
 		}
 
-		// Método estático para converter um caractere para o enum (útil em alguns casos de formulário)
 		public static Gender fromChar(Character c) {
 			if (c == null) {
 				return null;

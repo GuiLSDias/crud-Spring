@@ -15,19 +15,19 @@ public class Address {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id; // ID como Long
+	private Long id;
 
 	@NotBlank(message = "A rua é obrigatória.")
 	@Size(max = 200, message = "A rua não pode exceder {max} caracteres.")
 	@Column(nullable = false, length = 200)
-	private String street; // Alterado de 'place' para 'street' e tipo String
+	private String street;
 
 	@NotBlank(message = "O número é obrigatório.")
 	@Size(max = 20, message = "O número não pode exceder {max} caracteres.")
 	@Column(nullable = false, length = 20)
-	private String number; // Tipo String
+	private String number;
 
-	@NotBlank(message = "A cidade é obrigatória.") // Novo campo
+	@NotBlank(message = "A cidade é obrigatória.")
 	@Size(max = 100, message = "A cidade não pode exceder {max} caracteres.")
 	@Column(nullable = false, length = 100)
 	private String city;

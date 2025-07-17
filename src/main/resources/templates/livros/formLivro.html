@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${livro.id == null ? 'Cadastrar Livro' : 'Editar Livro'}"></title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+    <h1 class="text-center" th:text="${livro.id == null ? 'Cadastrar Novo Livro' : 'Editar Livro'}"></h1>
+    <hr>
+
+    <form th:action="@{/livros/salvar}" th:object="${livro}" method="post">
+        <input type="hidden" th:field="*{id}" />
+
+        <div class="form-group">
+            <label for="titulo">Título:</label>
+            <input type="text" id="titulo" th:field="*{titulo}" class="form-control"
+                   th:classappend="${#fields.hasErrors('titulo') ? 'is-invalid' : ''}" />
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('titulo')}" th:errors="*{titulo}"></div>
+        </div>
+
+        <div class="form-group">
+            <label for="isbn">ISBN:</label>
+            <input type="text" id="isbn" th:field="*{isbn}" class="form-control"
+                   th:classappend="${#fields.hasErrors('isbn') ? 'is-invalid' : ''}" />
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('isbn')}" th:errors="*{isbn}"></div>
+        </div>
+
+        <div class="form-group">
+            <label for="anoPublicacao">Ano de Publicação:</label>
+            <input type="number" id="anoPublicacao" th:field="*{anoPublicacao}" class="form-control"
+                   th:classappend="${#fields.hasErrors('anoPublicacao') ? 'is-invalid' : ''}" />
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('anoPublicacao')}" th:errors="*{anoPublicacao}"></div>
+        </div>
+
+        <div class="form-group">
+            <label for="genero">Gênero:</label>
+            <input type="text" id="genero" th:field="*{genero}" class="form-control"
+                   th:classappend="${#fields.hasErrors('genero') ? 'is-invalid' : ''}" />
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('genero')}" th:errors="*{genero}"></div>
+        </div>
+
+        <div class="form-group">
+            <label for="autor">Autor:</label>
+            <select id="autor" th:field="*{autor.id}" class="form-control"
+                    th:classappend="${#fields.hasErrors('autor') ? 'is-invalid' : ''}">
+                <option value="">Selecione um autor</option>
+                <option th:each="aut : ${autores}"
+                        th:value="${aut.id}"
+                        th:text="${aut.nome}"
+                        th:selected="${livro.autor != null and aut.id == livro.autor.id}">
+                </option>
+            </select>
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('autor')}" th:errors="*{autor}"></div>
+        </div>
+
+        <button type="submit" class="btn btn-success">Salvar Livro</button>
+        <a th:href="@{/livros/listar}" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
+</body>
+</html>

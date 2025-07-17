@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Gestão de Biblioteca</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+	<h1 class="text-center">Bem-vindo à Gestão de Biblioteca</h1>
+	<hr>
+	<div class="list-group">
+		<a th:href="@{/livros/listar}" class="list-group-item list-group-item-action">
+			<i class="fas fa-book"></i> Gerenciar Livros
+		</a>
+		<a th:href="@{/users/listar}" class="list-group-item list-group-item-action">
+			<i class="fas fa-users"></i> Gerenciar Membros
+		</a>
+		<a th:href="@{/autores/listar}" class="list-group-item list-group-item-action">
+			<i class="fas fa-user-edit"></i> Gerenciar Autores
+		</a>
+	</div>
+	<div class="mt-4 text-center">
+		<p>Selecione uma opção acima para começar.</p>
+	</div>
+</div>
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</body>
+</html>

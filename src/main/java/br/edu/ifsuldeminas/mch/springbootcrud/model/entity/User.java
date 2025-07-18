@@ -14,6 +14,8 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import jakarta.persistence.OneToMany;
+import java.util.List;
 
 @Entity
 @Table(name="users")
@@ -42,6 +44,8 @@ public class User {
 	@Valid
 	private Address address;
 
+	@OneToMany(mappedBy = "membro", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Emprestimo> emprestimos;
 
 	@Transient
 	private String log;
@@ -54,7 +58,13 @@ public class User {
 		this.address = new Address();
 	}
 
+	public List<Emprestimo> getEmprestimos() {
+		return emprestimos;
+	}
 
+	public void setEmprestimos(List<Emprestimo> emprestimos) {
+		this.emprestimos = emprestimos;
+	}
 
 	public Long getId() {
 		return id;

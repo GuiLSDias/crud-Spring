@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title th:text="${emprestimo.id == null ? 'Registrar Empréstimo' : 'Editar Empréstimo'}"></title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+  <h1 class="text-center" th:text="${emprestimo.id == null ? 'Registrar Novo Empréstimo' : 'Editar Empréstimo'}"></h1>
+  <hr>
+
+  <form th:action="@{/emprestimos/salvar}" th:object="${emprestimo}" method="post">
+    <input type="hidden" th:field="*{id}" />
+
+    <div class="form-group">
+      <label for="livro">Livro:</label>
+      <select id="livro" th:field="*{livro.id}" class="form-control"
+              th:classappend="${#fields.hasErrors('livro') ? 'is-invalid' : ''}">
+        <option value="">Selecione um livro</option>
+        <option th:each="liv : ${livros}"
+                th:value="${liv.id}"
+                th:text="${liv.titulo}"
+                th:selected="${emprestimo.livro != null and liv.id == emprestimo.livro.id}">
+        </option>
+      </select>
+      <div class="invalid-feedback" th:if="${#fields.hasErrors('livro')}" th:errors="*{livro}"></div>
+    </div>
+
+    <div class="form-group">
+      <label for="membro">Membro:</label>
+      <select id="membro" th:field="*{membro.id}" class="form-control"
+              th:classappend="${#fields.hasErrors('membro') ? 'is-invalid' : ''}">
+        <option value="">Selecione um membro</option>
+        <option th:each="mem : ${membros}"
+                th:value="${mem.id}"
+                th:text="${mem.name}"
+                th:selected="${emprestimo.membro != null and mem.id == emprestimo.membro.id}">
+        </option>
+      </select>
+      <div class="invalid-feedback" th:if="${#fields.hasErrors('membro')}" th:errors="*{membro}"></div>
+    </div>
+
+    <div class="form-group">
+      <label for="dataEmprestimo">Data de Empréstimo:</label>
+      <input type="date" id="dataEmprestimo" th:field="*{dataEmprestimo}" class="form-control"
+             th:classappend="${#fields.hasErrors('dataEmprestimo') ? 'is-invalid' : ''}" />
+      <div class="invalid-feedback" th:if="${#fields.hasErrors('dataEmprestimo')}" th:errors="*{dataEmprestimo}"></div>
+    </div>
+
+    <div class="form-group">
+      <label for="dataDevolucaoPrevista">Data de Devolução Prevista:</label>
+      <input type="date" id="dataDevolucaoPrevista" th:field="*{dataDevolucaoPrevista}" class="form-control"
+             th:classappend="${#fields.hasErrors('dataDevolucaoPrevista') ? 'is-invalid' : ''}" />
+      <div class="invalid-feedback" th:if="${#fields.hasErrors('dataDevolucaoPrevista')}" th:errors="*{dataDevolucaoPrevista}"></div>
+    </div>
+
+    <div class="form-group">
+      <label for="dataDevolucaoReal">Data de Devolução Real (Opcional):</label>
+      <input type="date" id="dataDevolucaoReal" th:field="*{dataDevolucaoReal}" class="form-control"
+             th:classappend="${#fields.hasErrors('dataDevolucaoReal') ? 'is-invalid' : ''}" />
+      <div class="invalid-feedback" th:if="${#fields.hasErrors('dataDevolucaoReal')}" th:errors="*{dataDevolucaoReal}"></div>
+    </div>
+
+    <button type="submit" class="btn btn-success">Salvar Empréstimo</button>
+    <a th:href="@{/emprestimos/listar}" class="btn btn-secondary">Cancelar</a>
+  </form>
+</div>
+</body>
+</html>
